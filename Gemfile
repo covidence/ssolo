@@ -1,0 +1,11 @@
+# frozen_string_literal: true
+
+source "https://rubygems.org"
+
+gemspec
+
+gem "irb"
+gem "puma"
+gem "rack-test"
+gem "rspec"
+gem "rubocop"

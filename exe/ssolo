@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+# -*- mode: ruby -*-
+# frozen_string_literal: true
+
+require "bundler/setup"
+require "logger"
+require "rack/handler/puma"
+require "ssolo"
+
+persistence = case ENV.fetch("SSOLO_PERSISTENCE", nil)
+              when "true"
+                true
+              when "false"
+                false
+              else
+                ENV.fetch("SSOLO_PERSISTENCE", nil)
+              end
+
+Rack::Handler::Puma.run(
+  SSOlo::Server.new(
+    sp_certificate: ENV.fetch("SSOLO_SP_CERTIFICATE"),
+    default_name_id: ENV.fetch("SSOLO_NAME_ID", nil),
+    persistence:
+  ),
+  Host: ENV.fetch("SSOLO_HOST", "127.0.0.1"),
+  Port: ENV.fetch("SSOLO_PORT", 9292),
+  Silent: ENV.fetch("SSOLO_SILENT", "true") == "true",
+  daemon: false,
+  config_files: ["-"]
+)
