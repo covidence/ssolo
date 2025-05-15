@@ -13,7 +13,7 @@ module SSOlo
                 <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
                   <ds:X509Data>
                     <ds:X509Certificate>
-                      #{certificate.to_pem.lines.grep_v(/BEGIN|END/).join.strip}
+                      #{certificate.to_pem.lines.grep_v(/BEGIN CERTIFICATE|END CERTIFICATE/).join.strip}
                     </ds:X509Certificate>
                   </ds:X509Data>
                 </ds:KeyInfo>
