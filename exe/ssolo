@@ -26,5 +26,8 @@ Rack::Handler::Puma.run(
   Port: ENV.fetch("SSOLO_PORT", 9292),
   Silent: ENV.fetch("SSOLO_SILENT", "true") == "true",
   daemon: false,
+  min_threads: 1,
+  max_threads: 1,
+  workers: 0,
   config_files: ["-"]
 )
